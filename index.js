@@ -8,11 +8,13 @@ class InViewPort extends React.PureComponent {
 	 static propTypes = {
 		onChange: PropTypes.func.isRequired,
 		active: PropTypes.bool,
+		partial: PropTypes.bool,
 		delay: PropTypes.number
 	}
 
 	static defaultProps = {
 		active: true,
+		partial: false,
 		delay: 100,
 	}
 
@@ -65,7 +67,7 @@ class InViewPort extends React.PureComponent {
 			})
 		})
 		const isVisible = (
-			this.state.rectBottom != 0 && this.state.rectTop >= 0 && this.state.rectBottom <= window.height &&
+			this.state.rectBottom != 0 && this.state.rectTop >= 0 && (this.props.partial ? this.state.rectTop : this.state.rectBottom) <= window.height &&
 			this.state.rectWidth > 0 && this.state.rectWidth <= window.width
 		)
 
